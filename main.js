@@ -34,3 +34,16 @@ function findCoworkersFor(employeeObj, employeeArr){
   }
   return (coworkersArr.length) ? coworkersArr : "Coworkers of ${employeeObj.name} could not be found in database.";
 }
+
+function findManagementChainForEmployee(employeeObj, employeeArr) {
+  let chainArr = [];
+
+  for (let i = 0; i < employeeArr.length; i++) {
+    let selectedEmployeeObj = employeeArr[i];
+    if (selectedEmployeeObj.id === employeeObj.managerId) {
+      chainArr.push(findManagementChainForEmployee(selectedEmployeeObj, employeeArr));
+    }
+  }
+  
+  return chainArr.reverse();
+}
