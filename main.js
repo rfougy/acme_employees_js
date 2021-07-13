@@ -1,11 +1,4 @@
-// Spacer function requires multiple functions within it. 
-// spacer function accepts a string
-  // the first 'word' in string is the function, followed by the input needed to be added to function
-  // spacer function splits the string into array, seperateor ' '.
-    // If array has only one value, assume 
-
-
-function findEmployeeByName(name, employeeArr) {
+function findEmployeeByName (name, employeeArr) {
   for (let i = 0; i < employeeArr.length; i++) {
     let employeeObj = employeeArr[i];
     for (let key in employeeObj) {
@@ -16,7 +9,7 @@ function findEmployeeByName(name, employeeArr) {
   return "Name could not be found in database.";
 }
 
-function findManagerFor(employeeObj, employeeArr){
+function findManagerFor (employeeObj, employeeArr){
   for (let i = 0; i < employeeArr.length; i++) {
     let managerObj = employeeArr[i];
     if (managerObj.id === employeeObj.managerId) return managerObj;
@@ -25,7 +18,7 @@ function findManagerFor(employeeObj, employeeArr){
   return "Manager of ${employeeObj.name} could not be found in database.";
 }
 
-function findCoworkersFor(employeeObj, employeeArr){
+function findCoworkersFor (employeeObj, employeeArr){
   let coworkersArr = [];
   for (let i = 0; i < employeeArr.length; i++) {
     let coworkerObj = employeeArr[i];
@@ -35,15 +28,23 @@ function findCoworkersFor(employeeObj, employeeArr){
   return (coworkersArr.length) ? coworkersArr : "Coworkers of ${employeeObj.name} could not be found in database.";
 }
 
-function findManagementChainForEmployee(employeeObj, employeeArr) {
+function findManagementChainForEmployee (employeeObj, employeeArr) {
   let chainArr = [];
 
+  if (!employeeObj.managerId) return employeeObj;
+  
   for (let i = 0; i < employeeArr.length; i++) {
     let selectedEmployeeObj = employeeArr[i];
     if (selectedEmployeeObj.id === employeeObj.managerId) {
       chainArr.push(findManagementChainForEmployee(selectedEmployeeObj, employeeArr));
     }
   }
-  
+
   return chainArr.reverse();
+}
+
+function generateManagementTree (employeeArr) {
+}
+
+function displayManagementTree (treeOfEmployees) {
 }
